@@ -26,12 +26,29 @@ class SubmissionsStudent extends React.Component {
             body: JSON.stringify({ email: this.props.email })
         });
 
-        const data = await dataResponse.json();
+        let data = await dataResponse.json();
+        data = this.sortLevels(data);
         this.setState({ students: data.students });
 
         //this.setState(await dataResponse.json());
-        console.log(data);
-        console.log(this.state)
+    }
+
+    sortLevels(dataParam) {
+        let levels = ['1-1', '1-2', '1-3', '1-4', '1-5', '2-1', '2-2', '2-3', '2-4', '2-5', '3-1', '3-2', '3-3', '3-4', '4-1', '4-2', '5-1'];
+        
+        //dataParam = {students: [{solutions: [{levelID: '1-1'}]}]}
+        //remove level 0-0 from dataParam.students[i].solutions array
+        for (let j = 0; j < dataParam.students.solutions.length; j++) {
+            if (dataParam.students.solutions[j].levelID == '0-0') {
+                dataParam.students.solutions.splice(j, 1);
+            }
+        }
+
+        dataParam.students.solutions.sort(function (a, b) {
+            return levels.indexOf(a.levelID) - levels.indexOf(b.levelID);
+        });
+        console.log(dataParam.students);
+        return dataParam;
     }
 
     renderTableHeaderSubmissions() {

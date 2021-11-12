@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
@@ -60,7 +60,7 @@ class App extends React.Component {
     const { isValidated, token } = this.state;
     console.log(this.state);
 
-    if (!isValidated || token == '') {
+    if (!isValidated || token === '') {
       return (
         <BrowserRouter>
           <NavigationBar isValidated={isValidated} email={this.state.email} logout={this.logout} />
@@ -72,7 +72,7 @@ class App extends React.Component {
               <Login setToken={this.setToken} login={this.login} />
             </Route>
             <Route path="/dashboard">
-              <Login setToken={this.setToken} />
+              <Login setToken={this.setToken} login={this.login} />
             </Route>
             <Route path="/password-reset">
               <ForgetPassword setTempEmail={this.setTempEmail} />

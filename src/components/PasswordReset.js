@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Col, Form, Row } from "react-bootstrap";
+import { Container, Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import bcrypt from 'bcryptjs';
 import CustomModal from "./CustomModal";
 
@@ -47,7 +47,7 @@ async function sendPasswordResetData(credentials) {
 }
 
 class PasswordReset extends React.Component {
-    state = { password: '', passwordReset: '', isValidated: false, isModalOpen: false, isSuccessful: false, errors: {} };
+    state = { password: '', passwordReset: '', isValidated: false, isModalOpen: false, isSuccessful: false, errors: {}, loadingIcon: false };
 
     constructor(props) {
         super(props);
@@ -104,13 +104,14 @@ class PasswordReset extends React.Component {
         if (this.handleValidation()) {
             const { token, user_id } = this.props.match.params;
             const { password, passwordReset } = this.state;
+            this.setState({ loadingIcon: true });
             let response = await sendPasswordResetData({ password, passwordReset, token, user_id });
             //give feedback to user after success
             if (response.message == "Password changed successfully.") {
-                this.setState({ isSuccessful: true, isModalOpen: true });
+                this.setState({ isSuccessful: true, isModalOpen: true, loadingIcon: false });
             }
             else {
-                this.setState({ isSuccessful: false, isModalOpen: true });
+                this.setState({ isSuccessful: false, isModalOpen: true, loadingIcon: false});
             }
         }
     }
@@ -145,7 +146,11 @@ class PasswordReset extends React.Component {
                                     </Form.Group>
                                     
                                     <Button onClick={this.handleSubmit} type="submit" variant="primary w-100">
-                                        Submit
+                                    {this.state.loadingIcon && <Spinner animation="border" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </Spinner>}
+                                    
+                                    {!this.state.loadingIcon && <span>Submit</span>}
                                     </Button>
                                 </Form>
                             </Col>

@@ -42,16 +42,37 @@ class Submissions extends React.Component {
                 body: JSON.stringify({ email: this.props.tutorEmail })
             });
 
-            //const data = await dataResponse.json();
-            //this.setState({ students: data });
+            let data = await dataResponse.json();
+            data = this.sortLevels(data);
+            this.setState({ students: data.students });
 
-            this.setState(await dataResponse.json());
+            //this.setState(await dataResponse.json());
             this.setState({ showPage: true });
             console.log(this.state);
         } else {
             //redirects user back to previous pages
             window.location.href = "/dashboard";
         }
+    }
+
+    sortLevels(dataParam) {
+        let levels = ['1-1', '1-2', '1-3', '1-4', '1-5', '2-1', '2-2', '2-3', '2-4', '2-5', '3-1', '3-2', '3-3', '3-4', '4-1', '4-2', '5-1'];
+        
+        //dataParam = {students: [{solutions: [{levelID: '1-1'}]}]}
+        for (let i = 0; i < dataParam.students.length; i++) {
+            //remove level 0-0 from dataParam.students[i].solutions array
+            for (let j = 0; j < dataParam.students[i].solutions.length; j++) {
+                if (dataParam.students[i].solutions[j].levelID == '0-0') {
+                    dataParam.students[i].solutions.splice(j, 1);
+                }
+            }
+
+            dataParam.students[i].solutions.sort(function (a, b) {
+                return levels.indexOf(a.levelID) - levels.indexOf(b.levelID);
+            })
+        }
+        console.log(dataParam.students);
+        return dataParam;
     }
 
     renderTableHeader() {
@@ -63,8 +84,9 @@ class Submissions extends React.Component {
     }
 
     renderTableData() {
+        console.log(this.state.students);
         return this.state.students.map((student, index) => {
-            const { id, name, age, email } = student //destructuring
+            const { id, name, email } = student //destructuring
             if (id <= 0) {
                 this.setState((prevState, props) => {
                     const row = 0;
