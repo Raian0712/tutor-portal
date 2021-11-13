@@ -57,6 +57,7 @@ const Register = () => {
     const [accountType, setAccountType] = useState();
     const [tutorName, setTutorName] = useState();
     const [tutorList, setTutorList] = useState([]);
+    const [tutorEmail, setTutorEmail] = useState();
     const [isModalOpen, setIsModalOpen] = useState();
     const [modalMessage, setModalMessage] = useState();
     const [errors, setErrors] = useState({});
@@ -157,7 +158,7 @@ const Register = () => {
             console.log("Validation complete");
             setLoadingIcon(true);
             const response = await registerUser({
-                name, email, password, accountType, tutorName, programme, group
+                name, email, password, accountType, tutorName, tutorEmail, programme, group
             });
             setLoadingIcon(false);
             console.log(response);
@@ -251,7 +252,15 @@ const Register = () => {
                             {accountType == "Student" &&
                             <Form.Group className="mb-3" controlId="form-tutor-name">
                                 <Form.Label>Tutor Name (if student type)</Form.Label>
-                                <Form.Control as="select" name="tutorName" onChange={e => setTutorName(e.target.value)}>
+                                <Form.Control as="select" name="tutorName" onChange={e => {
+                                    setTutorName(e.target.value);
+                                    console.log(tutorList);
+                                    tutorList.forEach(tutor => {
+                                        if (tutor.name == e.target.value) {
+                                            setTutorEmail(tutor.email);
+                                        }
+                                    });
+                                }}>
                                     <option value="">Choose Tutor</option>
                                     {tutorList.map((e, key) => {
                                         return <option key={key} value={e.name}>{e.name}</option>
