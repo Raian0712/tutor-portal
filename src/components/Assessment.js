@@ -302,6 +302,12 @@ class Assessment extends React.Component {
                 lowestIndex = i;
             }
         }
+        
+        if (highestIndex == lowestIndex) {
+            if (averageList[highestIndex] == averageList[lowestIndex + 1]) {
+                lowestIndex++;
+            }
+        }
 
         averageStatsOptions = this.calculateStats(averageList, highestIndex, lowestIndex);
         if (mode == "attemptsTaken") {
@@ -341,6 +347,7 @@ class Assessment extends React.Component {
             for (var j = 0; j < dataSeries.dataPoints.length; j++){
                 if (dataSeries.dataPoints[j].label == this.state.name) {
                     dataSeries.dataPoints[j].color = 'rgb(170, 0, 0)';
+                    dataSeries.dataPoints[j].indexLabel = "This Student: " + dataSeries.dataPoints[j].y;
                 } else if (dataSeries.dataPoints[j].label == "Average") {
                     dataSeries.dataPoints[j].color = 'rgb(0, 170, 0)';
                 }

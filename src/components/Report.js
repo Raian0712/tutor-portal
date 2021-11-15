@@ -355,7 +355,9 @@ class Report extends React.Component {
         };
         let averageStatsOptions = {
             highest: 0,
+            highestPerson: '',
             lowest: 0,
+            lowestPerson: '',
             average: 0
         };
 
@@ -393,6 +395,13 @@ class Report extends React.Component {
         }
 
         averageStatsOptions = this.calculateStats(averageList, highestIndex, lowestIndex);
+        if (highestIndex == lowestIndex) {
+            if (averageList[highestIndex] == averageList[lowestIndex + 1]) {
+                lowestIndex++;
+            }
+        }
+        averageStatsOptions.highestPerson = data[highestIndex].name;
+        averageStatsOptions.lowestPerson = data[lowestIndex].name;
         if (mode == "attemptsTaken") {
             switch (level) {
                 case "1-1": {
@@ -712,8 +721,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level11AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level11AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level11AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level11AttemptsStats.highest} by {this.state.level11AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level11AttemptsStats.lowest} by {this.state.level11AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level11AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -723,8 +732,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level11TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level11TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level11TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level11TimeStats.highest} by {this.state.level11TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level11TimeStats.lowest} by {this.state.level11TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level11TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -734,8 +743,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level11StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level11StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level11StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level11StepsStats.highest} by {this.state.level11StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level11StepsStats.lowest} by {this.state.level11StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level11StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -749,8 +758,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level12AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level12AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level12AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level12AttemptsStats.highest} by {this.state.level12AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level12AttemptsStats.lowest} by {this.state.level12AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level12AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -760,8 +769,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level12TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level12TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level12TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level12TimeStats.highest} by {this.state.level12TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level12TimeStats.lowest} by {this.state.level12TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level12TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -771,9 +780,9 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level12StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level13StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level13StepsStats.lowest}</p>
-                                                    <p>Average Amount of Steps Taken: {this.state.level13StepsStats.average}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level12StepsStats.highest} by {this.state.level12StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level12StepsStats.lowest} by {this.state.level12StepsStats.lowestPerson}</p>
+                                                    <p>Average Amount of Steps Taken: {this.state.level12StepsStats.average}</p>
                                                 </Col>
                                             </Row>
                                         </Tab>
@@ -786,8 +795,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level13AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level13AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level13AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level13AttemptsStats.highest} by {this.state.level13AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level13AttemptsStats.lowest} by {this.state.level13AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level13AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -797,8 +806,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level13TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level13TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level13TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level13TimeStats.highest} by {this.state.level13TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level13TimeStats.lowest} by {this.state.level13TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level13TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -808,8 +817,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level13StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level13StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level13StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level13StepsStats.highest} by {this.state.level13StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level13StepsStats.lowest} by {this.state.level13StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level13StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -823,8 +832,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level14AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level14AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level14AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level14AttemptsStats.highest} by {this.state.level14AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level14AttemptsStats.lowest} by {this.state.level14AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level14AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -834,8 +843,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level14TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level14TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level14TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level14TimeStats.highest} by {this.state.level14TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level14TimeStats.lowest} by {this.state.level14TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level14TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -845,8 +854,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level14StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level14StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level14StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level14StepsStats.highest} by {this.state.level14StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level14StepsStats.lowest} by {this.state.level14StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level14StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -860,8 +869,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level15AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level15AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level15AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level15AttemptsStats.highest} by {this.state.level15AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level15AttemptsStats.lowest} by {this.state.level15AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level15AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -871,8 +880,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level15TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level15TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level15TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level15TimeStats.highest} by {this.state.level15TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level15TimeStats.lowest} by {this.state.level15TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level15TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -882,8 +891,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level15StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level15StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level15StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level15StepsStats.highest} by {this.state.level15StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level15StepsStats.lowest} by {this.state.level15StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level15StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -897,8 +906,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level21AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level21AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level21AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level21AttemptsStats.highest} by {this.state.level21AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level21AttemptsStats.lowest} by {this.state.level21AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level21AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -908,8 +917,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level21TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level21TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level21TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level21TimeStats.highest} by {this.state.level21TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level21TimeStats.lowest} by {this.state.level21TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level21TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -919,8 +928,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level21StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level21StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level21StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level21StepsStats.highest} by {this.state.level21StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level21StepsStats.lowest} by {this.state.level21StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level21StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -934,8 +943,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level22AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level22AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level22AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level22AttemptsStats.highest} by {this.state.level22AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level22AttemptsStats.lowest} by {this.state.level22AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level22AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -945,8 +954,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level22TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level22TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level22TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level22TimeStats.highest} by {this.state.level22TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level22TimeStats.lowest} by {this.state.level22TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level22TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -956,8 +965,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level22StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level22StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level22StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level22StepsStats.highest} by {this.state.level22StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level22StepsStats.lowest} by {this.state.level22StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level22StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -971,8 +980,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level23AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level23AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level23AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level23AttemptsStats.highest} by {this.state.level23AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level23AttemptsStats.lowest} by {this.state.level23AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level23AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -982,8 +991,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level23TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level23TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level23TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level23TimeStats.highest} by {this.state.level23TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level23TimeStats.lowest} by {this.state.level23TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level23TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -993,8 +1002,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level23StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level23StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level23StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level23StepsStats.highest} by {this.state.level23StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level23StepsStats.lowest} by {this.state.level23StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level23StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1008,8 +1017,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level24AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level24AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level24AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level24AttemptsStats.highest} by {this.state.level24AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level24AttemptsStats.lowest} by {this.state.level24AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level24AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1019,8 +1028,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level24TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level24TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level24TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level24TimeStats.highest} by {this.state.level24TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level24TimeStats.lowest} by {this.state.level24TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level24TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1030,8 +1039,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level24StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level24StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level24StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level24StepsStats.highest} by {this.state.level24StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level24StepsStats.lowest} by {this.state.level24StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level24StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1045,8 +1054,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level25AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level25AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level25AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level25AttemptsStats.highest} by {this.state.level25AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level25AttemptsStats.lowest} by {this.state.level25AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level25AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1056,8 +1065,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level25TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level25TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level25TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level25TimeStats.highest} by {this.state.level25TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level25TimeStats.lowest} by {this.state.level25TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level25TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1067,8 +1076,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level25StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level25StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level25StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level25StepsStats.highest} by {this.state.level25StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level25StepsStats.lowest} by {this.state.level25StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level25StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1082,8 +1091,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level31AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level31AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level31AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level31AttemptsStats.highest} by {this.state.level31AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level31AttemptsStats.lowest} by {this.state.level31AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level31AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1093,8 +1102,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level31TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level31TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level31TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level31TimeStats.highest} by {this.state.level31TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level31TimeStats.lowest} by {this.state.level31TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level31TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1104,8 +1113,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level31StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level31StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level31StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level31StepsStats.highest} by {this.state.level31StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level31StepsStats.lowest} by {this.state.level31StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level31StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1119,8 +1128,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level32AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level32AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level32AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level32AttemptsStats.highest} by {this.state.level32AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level32AttemptsStats.lowest} by {this.state.level32AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level32AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1130,8 +1139,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level32TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level32TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level32TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level32TimeStats.highest} by {this.state.level32TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level32TimeStats.lowest} by {this.state.level32TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level32TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1141,8 +1150,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level32StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level32StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level32StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level32StepsStats.highest} by {this.state.level32StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level32StepsStats.lowest} by {this.state.level32StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level32StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1156,8 +1165,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level33AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level33AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level33AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level33AttemptsStats.highest} by {this.state.level33AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level33AttemptsStats.lowest} by {this.state.level33AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level33AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1167,8 +1176,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level33TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level33TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level33TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level33TimeStats.highest} by {this.state.level33TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level33TimeStats.lowest} by {this.state.level33TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level33TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1178,8 +1187,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level33StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level33StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level33StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level33StepsStats.highest} by {this.state.level33StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level33StepsStats.lowest} by {this.state.level33StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level33StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1193,8 +1202,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level34AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level34AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level34AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level34AttemptsStats.highest} by {this.state.level34AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level34AttemptsStats.lowest} by {this.state.level34AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level34AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1204,8 +1213,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level34TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level34TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level34TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level34TimeStats.highest} by {this.state.level34TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level34TimeStats.lowest} by {this.state.level34TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level34TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1215,8 +1224,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level34StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level34StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level34StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level34StepsStats.highest} by {this.state.level34StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level34StepsStats.lowest} by {this.state.level34StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level34StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1230,8 +1239,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level41AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level41AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level41AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level41AttemptsStats.highest} by {this.state.level41AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level41AttemptsStats.lowest} by {this.state.level41AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level41AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1241,8 +1250,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level41TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level41TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level41TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level41TimeStats.highest} by {this.state.level41TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level41TimeStats.lowest} by {this.state.level41TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level41TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1252,8 +1261,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level41StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level41StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level41StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level41StepsStats.highest} by {this.state.level41StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level41StepsStats.lowest} by {this.state.level41StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level41StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1267,8 +1276,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level42AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level42AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level42AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level42AttemptsStats.highest} by {this.state.level42AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level42AttemptsStats.lowest} by {this.state.level42AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level42AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1278,8 +1287,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level42TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level42TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level42TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level42TimeStats.highest} by {this.state.level42TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level42TimeStats.lowest} by {this.state.level42TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level42TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1289,8 +1298,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level42StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level42StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level42StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level42StepsStats.highest} by {this.state.level42StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level42StepsStats.lowest} by {this.state.level42StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level42StepsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1304,8 +1313,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level51AttemptsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Attempts Taken: {this.state.level51AttemptsStats.highest}</p>
-                                                    <p>Lowest Amount of Attempts Taken: {this.state.level51AttemptsStats.lowest}</p>
+                                                    <p>Highest Amount of Attempts Taken: {this.state.level51AttemptsStats.highest} by {this.state.level51AttemptsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Attempts Taken: {this.state.level51AttemptsStats.lowest} by {this.state.level51AttemptsStats.lowestPerson}</p>
                                                     <p>Average Amount of Attempts Taken: {this.state.level51AttemptsStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1315,8 +1324,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level51TimeOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Time Taken: {this.state.level51TimeStats.highest}</p>
-                                                    <p>Lowest Amount of Time Taken: {this.state.level51TimeStats.lowest}</p>
+                                                    <p>Highest Amount of Time Taken: {this.state.level51TimeStats.highest} by {this.state.level51TimeStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Time Taken: {this.state.level51TimeStats.lowest} by {this.state.level51TimeStats.lowestPerson}</p>
                                                     <p>Average Amount of Time Taken: {this.state.level51TimeStats.average}</p>
                                                 </Col>
                                             </Row>
@@ -1326,8 +1335,8 @@ class Report extends React.Component {
                                             <CanvasJSChart options={this.state.level51StepsOptions} />
                                             <Row>
                                                 <Col className="mt-3">
-                                                    <p>Highest Amount of Steps Taken: {this.state.level51StepsStats.highest}</p>
-                                                    <p>Lowest Amount of Steps Taken: {this.state.level51StepsStats.lowest}</p>
+                                                    <p>Highest Amount of Steps Taken: {this.state.level51StepsStats.highest} by {this.state.level51StepsStats.highestPerson}</p>
+                                                    <p>Lowest Amount of Steps Taken: {this.state.level51StepsStats.lowest} by {this.state.level51StepsStats.lowestPerson}</p>
                                                     <p>Average Amount of Steps Taken: {this.state.level51StepsStats.average}</p>
                                                 </Col>
                                             </Row>
