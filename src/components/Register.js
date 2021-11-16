@@ -30,21 +30,25 @@ async function registerUser(credentials) {
 
     let saltResponseJSON = await saltResponse.json();
 
-    const prefix = "$2b$04$";
-    let salt = prefix + saltResponseJSON.salt;
+    if (saltResponseJSON.message === "Register lookup completed") {
+        const prefix = "$2b$04$";
+        let salt = prefix + saltResponseJSON.salt;
 
-    let hash = await bcrypt.hash(credentials.password, salt);
-    credentials.password = hash;
+        let hash = await bcrypt.hash(credentials.password, salt);
+        credentials.password = hash;
 
-    const response = await fetch(`https://${process.env.REACT_APP_SERVER_ADDRESS}/users/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
+        const response = await fetch(`https://${process.env.REACT_APP_SERVER_ADDRESS}/users/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+        })
 
-    return response.json();
+        return response.json();
+    } else {
+        return saltResponseJSON;
+    }
 }
 
 const Register = () => {
@@ -163,6 +167,9 @@ const Register = () => {
             setLoadingIcon(false);
             console.log(response);
             if (response.message == "User registered successfully.") {
+                setModalMessage(response.message);
+                setIsModalOpen(true);
+            } else if (response.message == "User already exists") {
                 setModalMessage(response.message);
                 setIsModalOpen(true);
             }
