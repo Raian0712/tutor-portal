@@ -63,6 +63,8 @@ const Register = () => {
     const [tutorList, setTutorList] = useState([]);
     const [tutorEmail, setTutorEmail] = useState();
     const [isModalOpen, setIsModalOpen] = useState();
+    const [modalTitle, setModalTitle] = useState();
+    const [isValid, setIsValid] = useState(false);
     const [modalMessage, setModalMessage] = useState();
     const [errors, setErrors] = useState({});
     const [loadingIcon, setLoadingIcon] = useState();
@@ -167,11 +169,15 @@ const Register = () => {
             setLoadingIcon(false);
             console.log(response);
             if (response.message == "User registered successfully.") {
+                setModalTitle("Success");
                 setModalMessage(response.message);
                 setIsModalOpen(true);
+                setIsValid(true);
             } else if (response.message == "User already exists") {
+                setModalTitle("Error");
                 setModalMessage(response.message);
                 setIsModalOpen(true);
+                setIsValid(false);
             }
         } else {
             console.log("Validation failed");
@@ -288,8 +294,8 @@ const Register = () => {
                 </Row>
                 <CustomModal
                     show={isModalOpen}
-                    onHide={() => { setIsModalOpen(false); window.location.href = "/login" }}
-                    title="Success"
+                    onHide={() => { setIsModalOpen(false); if (isValid) { window.location.href = "/login"; } }}
+                    title={modalTitle}
                     message={modalMessage}
                     buttonText="OK"
                 />
