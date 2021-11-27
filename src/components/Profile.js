@@ -14,7 +14,7 @@ async function loadData(email) {
     });
 
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
     return data;
 }
 
@@ -68,8 +68,8 @@ const Profile = ({ email }) => {
                 setAccountType(data.user.accountType);
                 setCompleted(calculateProgress(data.user.solutions));
                 let percentageCalculated = calculatePercentage(17, completed);
-                console.log("Completed: " + completed);
-                console.log("Percentage: " + percentageCalculated);
+                //console.log("Completed: " + completed);
+                //console.log("Percentage: " + percentageCalculated);
                 setPercentage(percentageCalculated);
             }
             
@@ -145,15 +145,6 @@ const Profile = ({ email }) => {
                                     <div style={{ width: '5em', height: '5em' }}>
                                         <CircularProgressbar value={percentage} text={ completed + " / 17"} />
                                     </div>
-                                </Col>
-                            </Form.Group>}
-
-                            {accountType == "Student" && <Form.Group as={Row} className="mb-3" controlId="formPlaintextProgress">
-                                <Form.Label column sm="5">
-                                    Solutions
-                                </Form.Label>
-                                <Col sm="5">
-                                    <Button variant="primary" href={`https://${process.env.REACT_APP_WEBSITE_ADDRESS}/submissionsStudent/`}>Show</Button>
                                 </Col>
                             </Form.Group>}
                         </Form>

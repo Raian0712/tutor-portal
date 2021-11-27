@@ -152,7 +152,7 @@ class Report extends React.Component {
             });
 
             const data = await dataResponse.json();
-            console.log(data);
+            //console.log(data);
             this.setState({ data: data.students });
             const attemptsOptions = await this.processData(this.state.data, "attemptsTaken", "Average Amount of Attempts Taken to Complete a Level");
             const timeOptions = await this.processData(this.state.data, "timeTaken", "Average Amount of Time Taken to Complete a Level");
@@ -363,22 +363,22 @@ class Report extends React.Component {
 
         for (let i = 0; i < totalStudents; i++) {
             for (let j = 0; j < data[i].solutions.length; j++) {
-                    if (data[i].solutions[j].levelID === level) {
-                        if (mode == "timeTaken") {
-                            tempScore = data[i].solutions[j].timeTaken;
-                            axisYTitle = "Time in seconds";
-                        } else if (mode == "stepsTaken") {
-                            tempScore = data[i].solutions[j].stepsTaken;
-                            axisYTitle = "Number of steps";
-                        } else if (mode == "attemptsTaken") {
-                            tempScore = data[i].solutions[j].attempts;
-                            axisYTitle = "Number of attempts";
-                        }
-                        averageList[i] += tempScore;
-                        totalNonZeroStudents[i]++;
-                        tempScore = 0;
-                        break;
+                if (data[i].solutions[j].levelID === level) {
+                    if (mode == "timeTaken") {
+                        tempScore = data[i].solutions[j].timeTaken;
+                        axisYTitle = "Time in seconds";
+                    } else if (mode == "stepsTaken") {
+                        tempScore = data[i].solutions[j].stepsTaken;
+                        axisYTitle = "Number of steps";
+                    } else if (mode == "attemptsTaken") {
+                        tempScore = data[i].solutions[j].attempts;
+                        axisYTitle = "Number of attempts";
                     }
+                    averageList[i] += tempScore;
+                    totalNonZeroStudents[i]++;
+                    tempScore = 0;
+                    break;
+                }
                 
             }
         }
@@ -619,7 +619,7 @@ class Report extends React.Component {
         
 
         //stores data for graph render
-        console.log(data)
+        //console.log(data)
         averageOptions.data[0].dataPoints[0] = { label: "Average", y: averageStatsOptions.average, indexLabel: "Average: " + averageStatsOptions.average };
         for (let i = 1; i < totalStudents + 1; i++) {
             //sets average bar on the graph

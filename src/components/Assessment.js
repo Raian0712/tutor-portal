@@ -92,7 +92,7 @@ class Assessment extends React.Component {
         const accData = await response.json();
         if (accData.userType === "Tutor") {
             //loads data from server and returns it to be stored as state/prop
-            console.log(this.props);
+            //console.log(this.props);
             const dataResponse = await fetch(`https://${process.env.REACT_APP_SERVER_ADDRESS}/assess/getSubmission`, {
                 method: 'POST',
                 headers: {
@@ -103,7 +103,7 @@ class Assessment extends React.Component {
 
             let data = await dataResponse.json();
     
-            console.log(data);
+            //console.log(data);
 
             //find index of this.props.match.params.level_id in data.solutions
             let index = data.solutions.findIndex(x => x.levelID === this.props.match.params.level_id);
@@ -146,7 +146,7 @@ class Assessment extends React.Component {
             });
 
             const data2 = await dataResponse2.json();
-            console.log(data2);
+            //console.log(data2);
             const attemptsOptions = await this.processData(data2.students, "attemptsTaken", "Comparison of Attempts Taken to Complete a Level", this.state.levelID);
             const timeOptions = await this.processData(data2.students, "timeTaken", "Comparison of Time Taken to Complete a Level", this.state.levelID);
             const stepsOptions = await this.processData(data2.students, "stepsTaken", "Comparison of Steps Taken to Complete a Level", this.state.levelID);
@@ -195,7 +195,7 @@ class Assessment extends React.Component {
             this.setState({ isModalOpen: true, modalTitle: "Error", modalMessage: "Error submitting submission." });
         }
         
-        console.log(data);
+        //console.log(data);
     }
 
     processTagsString(data, index) {
@@ -272,23 +272,22 @@ class Assessment extends React.Component {
 
         for (let i = 0; i < totalStudents; i++) {
             for (let j = 0; j < data[i].solutions.length; j++) {
-                    if (data[i].solutions[j].levelID === level) {
-                        if (mode == "timeTaken") {
-                            tempScore = data[i].solutions[j].timeTaken;
-                            axisYTitle = "Time in seconds";
-                        } else if (mode == "stepsTaken") {
-                            tempScore = data[i].solutions[j].stepsTaken;
-                            axisYTitle = "Number of steps";
-                        } else if (mode == "attemptsTaken") {
-                            tempScore = data[i].solutions[j].attempts;
-                            axisYTitle = "Number of attempts";
-                        }
-                        averageList[i] += tempScore;
-                        totalNonZeroStudents[i]++;
-                        tempScore = 0;
-                        break;
+                if (data[i].solutions[j].levelID === level) {
+                    if (mode == "timeTaken") {
+                        tempScore = data[i].solutions[j].timeTaken;
+                        axisYTitle = "Time in seconds";
+                    } else if (mode == "stepsTaken") {
+                        tempScore = data[i].solutions[j].stepsTaken;
+                        axisYTitle = "Number of steps";
+                    } else if (mode == "attemptsTaken") {
+                        tempScore = data[i].solutions[j].attempts;
+                        axisYTitle = "Number of attempts";
                     }
-                
+                    averageList[i] += tempScore;
+                    totalNonZeroStudents[i]++;
+                    tempScore = 0;
+                    break;
+                }
             }
         }
 
@@ -320,7 +319,7 @@ class Assessment extends React.Component {
         
 
         //stores data for graph render
-        console.log(data)
+        //console.log(data)
         averageOptions.data[0].dataPoints[0] = { label: "Average", y: averageStatsOptions.average, indexLabel: "Average: " + averageStatsOptions.average };
         let index = 1;
         for (let i = 1; i < totalStudents + 1; i++) {
@@ -343,7 +342,7 @@ class Assessment extends React.Component {
     setColor(chart) {
         for(var i = 0; i < chart.data.length; i++) {
             let dataSeries = chart.data[i];
-            console.log(dataSeries.dataPoints);
+            //console.log(dataSeries.dataPoints);
             for (var j = 0; j < dataSeries.dataPoints.length; j++){
                 if (dataSeries.dataPoints[j].label == this.state.name) {
                     dataSeries.dataPoints[j].color = 'rgb(170, 0, 0)';
@@ -376,13 +375,13 @@ class Assessment extends React.Component {
         }
         //calculate average and reduce to 2 decimal palces
         averageStatsOptions.average = Math.round((total / legitNumber) * 100) / 100;
-        console.log(averageStatsOptions.average);
+        //console.log(averageStatsOptions.average);
 
         return averageStatsOptions;
     }
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         const textRowCount = this.state.code.split("\n").length
         const rows = textRowCount + 1
         if (this.state.showPage) {

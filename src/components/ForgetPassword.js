@@ -18,6 +18,7 @@ async function sendPasswordReset(credentials) {
 const ForgetPassword = ({ setTempEmail }) => {
     const [email, setEmail] = useState();
     const [isModalOpen, setIsModalOpen] = useState();
+    const [modalTitle, setModalTitle] = useState();
     const [modalMessage, setModalMessage] = useState();
     const [loadingIcon, setLoadingIcon] = useState();
     const [errors, setErrors] = useState({});
@@ -62,8 +63,15 @@ const ForgetPassword = ({ setTempEmail }) => {
                 email
             })
             setLoadingIcon(false);
-            setModalMessage(response.message + " If you still have not received your email, please try and check for it in your junk email list.");
-            setIsModalOpen(true);
+            if (response.message != "User with given email address doesn't exist.") {
+                setModalTitle("Success");
+                setModalMessage(response.message + " If you still have not received your email, please try and check for it in your junk email list.");
+                setIsModalOpen(true);
+            } else {
+                setModalTitle("Error");
+                setModalMessage(response.message);
+                setIsModalOpen(true);
+            }
         }
     }
 
@@ -102,7 +110,7 @@ const ForgetPassword = ({ setTempEmail }) => {
                 <CustomModal
                     show={isModalOpen}
                     onHide={() => { setIsModalOpen(false); }}
-                    title="Success"
+                    title={modalTitle}
                     message={modalMessage}
                     buttonText="OK"
                 />

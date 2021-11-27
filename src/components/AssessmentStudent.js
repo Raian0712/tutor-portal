@@ -65,7 +65,7 @@ class AssessmentStudent extends React.Component {
 
     async componentDidMount() {
         //loads data from server and returns it to be stored as state/prop
-        console.log(this.props);
+        //console.log(this.props);
         const dataResponse = await fetch(`https://${process.env.REACT_APP_SERVER_ADDRESS}/assess/getSubmission`, {
             method: 'POST',
             headers: {
@@ -76,7 +76,7 @@ class AssessmentStudent extends React.Component {
 
         let data = await dataResponse.json();
     
-        console.log(data);
+        //console.log(data);
 
         //find index of this.props.match.params.level_id in data.solutions
         let index = data.solutions.findIndex(x => x.levelID === this.props.match.params.level_id);
@@ -140,7 +140,7 @@ class AssessmentStudent extends React.Component {
     }
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         const textRowCount = this.state.code.split("\n").length;
         const rows = textRowCount + 1;
         if (this.state.showPage) {

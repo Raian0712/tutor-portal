@@ -48,7 +48,7 @@ class Submissions extends React.Component {
 
             //this.setState(await dataResponse.json());
             this.setState({ showPage: true });
-            console.log(this.state);
+            //console.log(this.state);
         } else {
             //redirects user back to previous pages
             window.location.href = "/dashboard";
@@ -71,7 +71,7 @@ class Submissions extends React.Component {
                 return levels.indexOf(a.levelID) - levels.indexOf(b.levelID);
             })
         }
-        console.log(dataParam.students);
+        //console.log(dataParam.students);
         return dataParam;
     }
 
@@ -84,7 +84,7 @@ class Submissions extends React.Component {
     }
 
     renderTableData() {
-        console.log(this.state.students);
+        //console.log(this.state.students);
         return this.state.students.map((student, index) => {
             const { id, name, email } = student //destructuring
             if (id <= 0) {
@@ -117,7 +117,7 @@ class Submissions extends React.Component {
 
     renderTableDataSubmissions() {
         let students = this.state.students[this.state.clickedEntry];
-        console.log(this.state.clickedEntry);
+        //console.log(this.state.clickedEntry);
         return this.state.students[this.state.clickedEntry].solutions.map((solutions, index) => {
             const { _id } = students;
             const { id, levelID } = solutions //destructuring

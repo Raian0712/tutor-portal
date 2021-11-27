@@ -18,7 +18,7 @@ async function loginUser(credentials) {
 
     const prefix = "$2b$04$";
     let salt = prefix + saltResponseJSON.salt;
-    //console.log(salt)
+    ////console.log(salt)
 
     let hash = await bcrypt.hash(credentials.password, salt);
     credentials.password = hash;
@@ -38,6 +38,7 @@ const Login = ({ setToken, login }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [isModalOpen, setIsModalOpen] = useState();
+    const [modalTitle, setModalTitle] = useState();
     const [modalMessage, setModalMessage] = useState();
     const [loadingIcon, setLoadingIcon] = useState();
     const [errors, setErrors] = useState({});
@@ -88,9 +89,11 @@ const Login = ({ setToken, login }) => {
             })
             setLoadingIcon(false);
             if (response.message != "You're now logged in!") {
+                setModalTitle("Error");
                 setModalMessage(response.message);
                 setIsModalOpen(true);
             } else {
+                setModalTitle("Success");
                 setToken(response.token, email);
             }
         }
@@ -146,7 +149,7 @@ const Login = ({ setToken, login }) => {
                 <CustomModal
                     show={isModalOpen}
                     onHide={() => { setIsModalOpen(false); }}
-                    title="Success"
+                    title={modalTitle}
                     message={modalMessage}
                     buttonText="OK"
                 />

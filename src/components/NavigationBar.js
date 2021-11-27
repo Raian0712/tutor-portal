@@ -11,7 +11,6 @@ class NavigationBar extends React.Component {
     }
 
     async verifyTutorOrStudent(email) {
-        console.log(email)
         const response = await fetch(`https://${process.env.REACT_APP_SERVER_ADDRESS}/users/getUserType`, {
             method: 'POST',
             headers: {
@@ -23,7 +22,6 @@ class NavigationBar extends React.Component {
         });
 
         const data = await response.json();
-        console.log(data);
         this.setState({
             accountType: data.userType
         })
@@ -36,7 +34,6 @@ class NavigationBar extends React.Component {
 
     render() {
         const { isValidated } = this.props;
-        console.log(this.props);
 
         return (
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -47,12 +44,13 @@ class NavigationBar extends React.Component {
                     <Nav className="me-auto">
                         {this.state.accountType == "Tutor" && <Nav.Link href="/submissions">Submissions</Nav.Link>}
                         {this.state.accountType == "Tutor" && <Nav.Link href="/report">Reports</Nav.Link>}
+                        {this.state.accountType == "Student" && <Nav.Link href="/submissionsStudent">Solutions</Nav.Link>}
                     </Nav>
                     <Nav>
                         {!isValidated && <Nav.Link href="/login">Login</Nav.Link>}
                         {!isValidated && <Nav.Link href="/register">Register</Nav.Link>}
                         {isValidated && <Nav.Link href="/profile">Profile</Nav.Link>}
-                        {isValidated && <Nav.Link onClick={() => { console.log('logging out'); this.props.logout() }}>Logout</Nav.Link>}
+                        {isValidated && <Nav.Link onClick={() => { this.props.logout() }}>Logout</Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

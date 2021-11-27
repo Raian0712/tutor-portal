@@ -28,7 +28,7 @@ async function sendPasswordResetData(credentials) {
 
     const prefix = "$2b$04$";
     let salt = prefix + saltResponseJSON.salt;
-    console.log(salt);
+    //console.log(salt);
 
     let hash = bcrypt.hashSync(credentials.password, salt);
     credentials.password = hash;
@@ -56,14 +56,14 @@ class PasswordReset extends React.Component {
     
     async componentDidMount() {
         //validates token
-        console.log(this.props)
+        //console.log(this.props)
         const response = await validatePasswordResetToken(this.props.match.params.token);
         if (response.message == "Your password reset token is valid.") {
             this.setState({ isValidated: true });
         }
         else {
             this.setState({ isModalOpen: true });
-            console.log(response.message);
+            //console.log(response.message);
         }
     }
 

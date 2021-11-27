@@ -58,7 +58,7 @@ class App extends React.Component {
 
   render() {
     const { isValidated, token } = this.state;
-    console.log(this.state);
+    //console.log(this.state);
 
     if (!isValidated || token === '') {
       return (

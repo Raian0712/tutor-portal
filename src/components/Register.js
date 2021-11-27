@@ -149,7 +149,7 @@ const Register = () => {
             errorsList["group"] = "Group cannot be empty";
         }        
 
-        if (tutorName == "" && accountType == "Student") {
+        if ((tutorName == "" || tutorName == undefined) && accountType == "Student") {
             formIsValid = false;
             errorsList["tutorName"] = "Tutor name cannot be empty";
         }
@@ -161,13 +161,13 @@ const Register = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         if (handleValidation()) {
-            console.log("Validation complete");
+            //console.log("Validation complete");
             setLoadingIcon(true);
             const response = await registerUser({
                 name, email, password, accountType, tutorName, tutorEmail, programme, group
             });
             setLoadingIcon(false);
-            console.log(response);
+            //console.log(response);
             if (response.message == "User registered successfully.") {
                 setModalTitle("Success");
                 setModalMessage(response.message);
@@ -180,7 +180,7 @@ const Register = () => {
                 setIsValid(false);
             }
         } else {
-            console.log("Validation failed");
+            //console.log("Validation failed");
         }
         
         //setToken(response.token);
@@ -190,7 +190,7 @@ const Register = () => {
     useEffect(() => {
         const fetchData = async () => {
             const tempTutorList = await getTutors();
-            console.log(tempTutorList);
+            //console.log(tempTutorList);
             setTutorList(tempTutorList.tutors);
         }
 
@@ -267,7 +267,7 @@ const Register = () => {
                                 <Form.Label>Tutor Name (if student type)</Form.Label>
                                 <Form.Control as="select" name="tutorName" onChange={e => {
                                     setTutorName(e.target.value);
-                                    console.log(tutorList);
+                                    //console.log(tutorList);
                                     tutorList.forEach(tutor => {
                                         if (tutor.name == e.target.value) {
                                             setTutorEmail(tutor.email);

@@ -6,7 +6,7 @@ const Dashboard = ({ email }) => {
 
     useEffect(() => {
         async function verifyTutorOrStudent(email) {
-            console.log(email)
+            //console.log(email)
             const response = await fetch(`https://${process.env.REACT_APP_SERVER_ADDRESS}/users/getUserType`, {
                 method: 'POST',
                 headers: {
@@ -18,7 +18,7 @@ const Dashboard = ({ email }) => {
             });
         
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             return data.userType;
         }
 

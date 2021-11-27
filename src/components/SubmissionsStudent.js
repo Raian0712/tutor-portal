@@ -47,7 +47,7 @@ class SubmissionsStudent extends React.Component {
         dataParam.students.solutions.sort(function (a, b) {
             return levels.indexOf(a.levelID) - levels.indexOf(b.levelID);
         });
-        console.log(dataParam.students);
+        //console.log(dataParam.students);
         return dataParam;
     }
 
