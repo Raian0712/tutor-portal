@@ -30,7 +30,7 @@ async function registerUser(credentials) {
 
     let saltResponseJSON = await saltResponse.json();
 
-    if (saltResponseJSON.message === "Register lookup completed") {
+    if (saltResponseJSON.message === "Register lookup complete") {
         const prefix = "$2b$04$";
         let salt = prefix + saltResponseJSON.salt;
 
